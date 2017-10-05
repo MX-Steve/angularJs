@@ -8,7 +8,7 @@
 <body>
     <h3>3.ngIf</h3>
     <p ng-if="true">欢迎来电</p>
-    <span ng-init="isMember=false;heart=true;hasMore=false"></span>
+    <span ng-init="isMember=false;heart=true;hasMore=false;url='img/1.jpg'"></span>
     <div ng-if="isMember">会员区域</div>
     <div ng-if="!isMember">非会员区域</div>
     <h3>4.ngShow</h3>
@@ -18,5 +18,8 @@
     <h3>5.ngHide</h3>
     <button ng-show="hasMore">点我加载更多</button>
     <p ng-hide="hasMore">没有更多数据了</p>
+    <h3>6.ngSrc</h3>
+    <img src="img/1.jpg"/>
+    <img ng-src="{{url}}" alt=""/>
 </body>
 </html>

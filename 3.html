@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--2.调用模块-->
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mvc</title>
+    <script src="js/angular.js"></script>
+</head>
+<body>
+<!--4.调用控制器-->
+<div ng-controller="myCtrl">
+    <p>{{name}}</p>
+    <p ng-bind="name"></p>
+    <button ng-click="show()">启动事件</button>
+    <hr/>
+    <span>{{num}}</span><button ng-click="add()">自增</button>
+    <hr/>
+    <table>
+        <tr ng-repeat="obj in arr track by $index">
+            <td><img ng-src="{{obj.url}}"/></td>
+            <td>
+                <h2>{{obj.title}}</h2>
+                <p>{{obj.price}}</p>
+            </td>
+        </tr>
+    </table>
+    <button ng-click="addFlower()">加载更多</button>
+</div>
+
+<script>
+//    1.声明一个模块
+    var app = angular.module('myApp',['ng']);
+
+//    3.创建控制器
+    app.controller('myCtrl',function($scope){
+        //$scope:作用域对象
+        console.log("in myCtrl");
+        $scope.name='web1706';
+        $scope.num=0;
+        $scope.show= function(){
+            console.log("function is called");
+        }
+        $scope.add = function(){
+            $scope.num++;
+        }
+        $scope.arr=[
+            {url:'img/1.jpg',title:'水仙花',price:24},
+            {url:'img/2.jpg',title:'茉莉花',price:21},
+            {url:'img/3.jpg',title:'栀子花',price:23},
+            {url:'img/4.jpg',title:'樱花',price:44}
+        ];
+        $scope.addFlower = function(){
+            $scope.n = parseInt(Math.random()*4);
+            $scope.arr.push(
+                    $scope.arr[$scope.n]
+            );
+        }
+    });
+
+
+
+
+</script>
+</body>
+</html>
