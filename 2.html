@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/angular.js"></script>
+</head>
+<body>
+    <h3>3.ngIf</h3>
+    <p ng-if="true">欢迎来电</p>
+    <span ng-init="isMember=false;heart=true;hasMore=false"></span>
+    <div ng-if="isMember">会员区域</div>
+    <div ng-if="!isMember">非会员区域</div>
+    <h3>4.ngShow</h3>
+    <div ng-show="heart">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem eaque, error in laborum libero quas ratione totam ullam voluptate voluptatibus. Atque dicta ea eius error perspiciatis quibusdam soluta suscipit velit!
+    </div>
+    <h3>5.ngHide</h3>
+    <button ng-show="hasMore">点我加载更多</button>
+    <p ng-hide="hasMore">没有更多数据了</p>
+</body>
+</html>

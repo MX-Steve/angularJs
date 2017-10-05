@@ -14,13 +14,14 @@
 
 <h2>ng中的表达式</h2>
 
-<p>{{4+7}}</p>
+<!--<p>{{4+7}}</p>
 <p>{{4>5}}</p>
 <p>{{5>4?"大于":"小于"}}</p>
 <p>{{5==4}}</p>
 <p>{{true || false}}</p>
 <p>{{true && false}}</p>
 <h4>初始化数据</h4>
+
 <span ng-init="name='Michael';
 car={name:'BMW',price:50};
 stu = [
@@ -60,10 +61,22 @@ stu = [
     </tr>
     </tbody>
 </table>
+-->
 <hr/>
 <hr/>
+<h4>ng中常用指令</h4>
+<span ng-init="msg='这是一个span标签'" ng-bind="msg"></span>
+<hr/>
+<hr/>
+<h5>ngRepeat</h5>
+<ul ng-init="arr=[10,20,30,40,50]">
+    <li ng-repeat="tmp in arr" ng-if="$last">{{tmp+" "+$index}}</li>
+</ul>
+<ul ng-init="arr=[10,20,30,40,50]">
+    <li ng-repeat="(k,v) in arr">{{k+" "+v}}</li>
+</ul>
+<span ng-init="car={name:'bmw',price:35}"></span>
 
-
-
+<div><a href="#" ng-repeat="(k,v) in car">{{k+":"+v}}</a></div>
 </body>
 </html>
