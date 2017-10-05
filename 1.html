@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/angular.js"></script>
+</head>
+<body ng-app>
+<!--
+    ng-app:指令，用来指定ng作用域范围
+            可以自动载入并启动ng应用
+-->
+<h1>hello ng</h1>
+
+<h2>ng中的表达式</h2>
+
+<p>{{4+7}}</p>
+<p>{{4>5}}</p>
+<p>{{5>4?"大于":"小于"}}</p>
+<p>{{5==4}}</p>
+<p>{{true || false}}</p>
+<p>{{true && false}}</p>
+<h4>初始化数据</h4>
+<span ng-init="name='Michael';
+car={name:'BMW',price:50};
+stu = [
+    {name:'zhang1',sex:'男',score:23},
+    {name:'zhang2',sex:'男',score:23},
+    {name:'zhang3',sex:'男',score:23},
+    {name:'zhang4',sex:'男',score:23},
+    {name:'zhang5',sex:'男',score:23}
+
+]">{{name}}</span>
+<p>{{name}}</p>
+<p>{{car.name}}</p>
+<p>{{car.price}}</p>
+<table>
+    <thead>
+    <tr>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>成绩</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{stu[0].name}}</td>
+        <td>{{stu[0].sex}}</td>
+        <td>{{stu[0].score}}</td>
+    </tr>
+    <tr>
+        <td>{{stu[1].name}}</td>
+        <td>{{stu[1].sex}}</td>
+        <td>{{stu[1].score}}</td>
+    </tr>
+    <tr>
+        <td>{{stu[2].name}}</td>
+        <td>{{stu[2].sex}}</td>
+        <td>{{stu[2].score}}</td>
+    </tr>
+    </tbody>
+</table>
+<hr/>
+<hr/>
+
+
+
+</body>
+</html>
