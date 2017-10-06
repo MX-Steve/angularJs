@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <h2>控制器和作用域范围</h2>
+    <p>{{num}}</p>
+
+</div>
+
+<div ng-controller="myCtrl02">
+    <h2>事件传参</h2>
+    <p>{{num}}</p>
+    <hr/>
+    <button ng-click="funcCall()">调用myctrl03的方法</button>
+    <div ng-controller="myCtrl03">
+        <button ng-click="toChild()">03发送给子作用域04</button>
+        <p>{{school}}</p>
+        <div ng-controller="myCtrl04"></div>
+    </div>
+</div>
+
+<script>
+    var app = angular.module('myApp', ['ng']);
+    app.controller('myCtrl', function ($scope,$rootScope) {
+        $rootScope.num = 100;
+
+
+    });
+    app.controller('myCtrl02', function ($scope) {
+        $scope.school = "Tarena";
+
+        $scope.$on('event_parent',function(ev,data){
+            console.log('接收到event_parent事件');
+            $scope.funcCall =data;
+        });
+    });
+    app.controller('myCtrl03', function ($scope) {
+        $scope.toParent = function(){
+            console.log('ToParent');
+        }
+        $scope.$emit('event_parent',$scope.toParent);
+        $scope.num = 10;
+        $scope.toChild = function(){
+            $scope.$broadcast('to_child',$scope.num);
+        }
+    });
+    app.controller('myCtrl04', function ($scope) {
+        $scope.$on('to_child',function(ev,data){
+            console.log('04接收到03穿过来的数据:'+data);
+        });
+    });
+</script>
+</body>
+</html>

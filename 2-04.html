@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <h1>3.function</h1>
+    <h1>4.服务</h1>
+    <h2>4.1内置服务</h2>
+    <p>当前地址为：{{url}}</p>
+    <button ng-click="getUrl()">获取地址</button>
+    <h2>控制器和作用域范围</h2>
+</div>
+
+
+<script>
+    var app = angular.module('myApp', ['ng']);
+    app.controller('myCtrl', function ($scope,$location) {
+        var list=[11,22,33,44];
+        $scope.name='Lihan';
+        angular.forEach(list,function(v,k){
+            console.log(k+":"+v);
+        });
+        var stu = {name:'Lucy',age:20};
+        angular.forEach(stu,function(v,k){
+            console.log(k+":"+v);
+        });
+        angular.uppercase(name);
+        //定义一个json对象
+        var jsonObj = {"name":"Jhon","age":20};
+        var jsonStr = angular.toJson(jsonObj);
+        console.log(jsonStr);
+        var newObj = angular.fromJson(jsonStr);
+        console.log(newObj);
+        $scope.url='';
+        $scope.getUrl = function(){
+            $scope.url = $location.absUrl();
+            console.log($location.path($scope.url));
+            console.log($location.$$port($scope.url));
+        }
+    });
+
+</script>
+</body>
+</html>

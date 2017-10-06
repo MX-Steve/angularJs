@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/angular.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <table>
+        <thead>
+        <tr>
+            <th>请选择</th>
+            <th>姓名</th>
+            <th>生日</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="stu in stus">
+            <td>
+                <input type="checkbox" ng-model="stu.isChecked" ng-click="checkIt()"/>
+            </td>
+            <td>{{stu.name}}</td>
+            <td>{{stu.birth}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <input type="checkbox" ng-model="checkBoxAll" ng-click="checkAll()">全选/取消全选
+
+</div>
+
+
+<script>
+    var app = angular.module('myApp', ['ng']);
+    app.controller('myCtrl', function ($scope) {
+        $scope.stus = [
+            {name:'张三',birth:'2017-04-24',isChecked:false},
+            {name:'李四',birth:'2017-05-25',isChecked:false},
+            {name:'王五',birth:'2017-02-01',isChecked:false}
+        ];
+        $scope.checkBoxAll='';
+        //1.全选和取消全选
+        $scope.checkAll = function(){
+            angular.forEach($scope.stus,function(v,k){
+                v.isChecked=$scope.checkBoxAll;
+            });
+        };
+        //2.单个选择
+        $scope.checkIt = function(){
+            var result = true;
+            angular.forEach($scope.stus,function(v,k){
+                result = result && v.isChecked;
+            });
+
+            $scope.checkBoxAll = result;
+        };
+
+
+
+    });
+
+</script>
+</body>
+</html>
