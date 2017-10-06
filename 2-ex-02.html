@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/angular.js"></script>
+    <style>
+        .box{
+            width:200px;
+            height:250px;
+            border:1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <div class="box">
+        <img ng-src="img/{{flower}}"/>
+        <select ng-model="flower">
+            <option value="1.jpg">水仙花</option>
+            <option value="2.jpg">金香花</option>
+        </select>
+        <br/>
+        <input type="checkbox" ng-model="isAgree"/>是否同意本站协议
+        <br/>
+        <button ng-disabled="!isAgree">注册</button>
+    </div>
+
+</div>
+
+
+<script>
+    var app = angular.module('myApp', ['ng']);
+    app.controller('myCtrl', function ($scope) {
+        $scope.flowers=[
+
+        ];
+    });
+
+</script>
+</body>
+</html>

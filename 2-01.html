@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/angular.js"></script>
+</head>
+<body>
+
+<div ng-controller="myCtrl">
+    <!--作为属性使用-->
+    <div ts-hello></div>
+    <!--作为标签使用-->
+    <ts-hello></ts-hello>
+    <!--作为class使用-->
+    <div class="ts-hello"></div>
+    <!--作为注释使用-->
+    <!-- directive:ts-hello -->
+    <hr/>
+    <h1>自定义指令传参</h1>
+
+    <div ts-hi='' test-name="world"></div>
+
+    <div ts-directive="" ts-name="Hello Directive"></div>
+
+</div>
+
+
+
+<script>
+    var app  = angular.module('myApp',['ng']);
+
+    app.controller('myCtrl',function($scope){
+
+    });
+    //自定义指令==>定义的时候用驼峰，使用的时候用烤串
+    //注释使用：在指令中添加一个属性：replace:true
+    app.directive('tsHello',function(){
+        return {
+            template:'<h1>Hello Directive</h1>',
+            restrict:'EACM',
+            replace:true
+        }
+    });
+
+    app.directive('tsHi',function(){
+        return {
+            template:'<p>hi {{testName}}</p>',
+            scope:{
+                testName:'@'
+            }
+        }
+    });
+
+    app.directive('tsDirective',function(){
+        return {
+            template:'<h3>{{tsName}}</h3>',
+            scope:{
+                tsName:'@'
+            }
+        }
+    });
+
+
+</script>
+</body>
+</html>
