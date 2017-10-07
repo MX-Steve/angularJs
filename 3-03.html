@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--调用模块-->
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="js/angular.js"></script>
+    <title></title>
+</head>
+<body>
+
+
+<div ng-controller="myCtrl">
+
+</div>
+
+<script src="js/jquery-1.11.3.js"></script>
+<script>
+    //创建模块
+    var app = angular.module('myApp', ['ng' ]);
+
+    //统一设置头部信息
+    app.run(function($http){
+        $http.defaults.headers.post = {'Content-Type':'application/x-www-form-urlencoded'};
+    });
+
+    //创建一个控制器
+    app.controller('myCtrl', function ($scope,$http) {
+//        $http.get('data/list.php').success(function(data){
+//            console.log(data);
+//        });
+        var obj = {'name':'zhangsan','age':12};
+        console.log($.param(obj));
+        $http.post('data/list.php', $.param(obj)).success(function(data){
+            console.log(data);
+        });
+    });
+
+
+</script>
+
+</body>
+</html>

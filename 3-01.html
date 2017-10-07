@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <p>{{num}}</p>
+    <hr/>
+    <p>
+        <img ng-src="img/{{list[index]}}"/>
+    </p>
+</div>
+
+
+<script>
+    var app = angular.module('myApp', ['ng']);
+    app.controller('myCtrl', function ($scope,$interval) {
+        $scope.num=0;
+//        setInterval(function(){
+//            console.log($scope.num++);
+//            $scope.$digest();
+//        },500);
+        $scope.list = ['1.jpg','2.jpg','3.jpg','4.jpg'];
+        $scope.index = 0;
+        $interval(function(){
+            $scope.index++;
+            if($scope.index >4){
+                $scope.index = 0;
+            }
+        },500);
+        var t = $interval(function(){
+            $scope.num++;
+            if($scope.num>30){
+                $interval.cancel(t);
+            }
+        },500)
+    });
+
+</script>
+</body>
+</html>

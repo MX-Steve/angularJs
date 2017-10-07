@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--调用模块-->
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="js/angular.js"></script>
+    <title></title>
+</head>
+<body>
+
+
+<div ng-controller="myCtrl">
+    <button ng-click="add()">添加商品</button>
+    <table>
+        <thead>
+        <tr>
+            <th>价格</th>
+            <th>数量</th>
+            <th>小计</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="tmp in list">
+            <td>{{tmp.price}}</td>
+            <td>
+                <input ng-keyup="calTotal()" type="text" ng-model="tmp.count"/>
+            </td>
+            <td>{{(tmp.price*tmp.count).toFixed(2)}}</td>
+            <td><button ng-click="delete($index)">删除</button></td>
+        </tr>
+        </tbody>
+    </table>
+    <button ng-click="calTotal()">总计</button><span>{{calTotal()}}</span>
+</div>
+
+
+<script>
+    //创建模块
+    var app = angular.module('myApp', ['ng']);
+
+    //创建一个控制器
+    app.controller('myCtrl', function ($scope,$http) {
+        $http.get('data/2.json').success(function(data){
+            $scope.list = data;
+            $scope.totalPrice = 0;
+
+        });
+
+        $scope.calTotal = function(){
+            var total = 0;
+            angular.forEach($scope.list,function(v,k){
+                total += v.price* v.count;
+            });
+            return total.toFixed(2);
+        };
+        $scope.add = function(){
+            var price = (Math.random()*100).toFixed(2);
+            var count = Math.round(Math.random()*10+1);
+            $scope.list.push({price:price,count:count});
+        };
+        $scope.delete = function(n){
+            $scope.list.splice(n,1);
+        }
+    });
+
+
+</script>
+
+</body>
+</html>

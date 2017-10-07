@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--调用模块-->
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="js/angular.js"></script>
+    <title></title>
+</head>
+<body>
+
+
+<div ng-controller="myCtrl">
+    <h1>自定义服务的讲解</h1>
+    <h2>factory方法</h2>
+    <p>app.factory('服务名',function(){return{print:function(){}}});</p>
+    <button ng-click="printSth()">点击</button>
+    <h2>service方法</h2>
+    <p>app.service('服务名',function(){this.name='zhangsan',this.speak = function(){}});</p>
+    <p>{{userName}}</p>
+    <button ng-click="tell()">tell</button>
+    <h2>constant方法</h2>
+    <p>app.constant('服务名',value),value可以是属性或者对象:跟配置相关的服务</p>
+    <button ng-click="changeMsg()">修改值</button>
+    <p>angular.extend()用来修改自定义服务的值</p>
+    <h2>value方法</h2>
+    <p>app.value('服务名',value),value可以是属性或者对象</p>
+    <p>constant常用来创建配置数据，value常用来创建对象</p>
+</div>
+
+
+<script>
+    //创建模块
+    var app = angular.module('myApp', ['ng']);
+
+    app.factory('$output',function(){
+        return {
+            print:function(msg){
+                console.log(msg);
+            }
+        }
+    });
+
+    app.service('$student',function(){
+        this.name = '张三';
+        this.sex = 'male';
+        this.hello = function(){
+            console.log('hello,i am '+this.name);
+        }
+    });
+
+    app.constant('$ID',{
+        id:10,
+        name:'tarena',
+        date:'2014-08-12'
+    });
+
+    app.value('$PRICE',{price:39});
+
+    //创建一个控制器
+    app.controller('myCtrl', function (
+            $scope,$output,$student,$ID,$PRICE) {
+        console.log($PRICE.price);
+        $scope.printSth = function(){
+            $output.print('hello service');
+        };
+        $scope.userName = $student.name;
+        $scope.tell = function(){
+            $student.hello();
+        };
+        console.log($ID.date);
+        $scope.changeMsg = function(){
+            //angular.extend()用来修改自定义服务的值
+            angular.extend($ID,{id:30});
+            console.log($ID.id);
+        }
+
+    });
+
+
+</script>
+
+</body>
+</html>

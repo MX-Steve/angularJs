@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--调用模块-->
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="js/angular.js"></script>
+    <title></title>
+</head>
+<body>
+
+
+<div ng-controller="myCtrl">
+    <h1>$http请求：get、post</h1>
+    <p>$http.get('1.php').success(function(data){console.log(data)})</p>
+    <p>$http.defaults.headers.post = {'Content-Type':'application/x-www-form-urlencoded'}</p>
+    <p>$http.post('url',data).success(function(data){console.log(data)})</p>
+</div>
+
+
+<script>
+    //创建模块
+    var app = angular.module('myApp', ['ng']);
+
+    //创建一个控制器
+    app.controller('myCtrl', function ($scope,$http) {
+        //发起get请求
+        $http.get('data/1.php').success(function(data){
+            console.log(data);
+        });
+        //发起post请求
+        $http.defaults.headers.post = {'Content-Type':'application/x-www-form-urlencoded'};
+        $http.post('data/1.php').success(function(data){
+            console.log(data);
+        });
+    });
+
+
+</script>
+
+</body>
+</html>
