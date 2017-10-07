@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--调用模块-->
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="js/angular.js"></script>
+    <title></title>
+</head>
+<body>
+
+
+<div ng-controller="myCtrl">
+    <input type="text" ng-model="num1"/>
+    <input type="text" ng-model="num2"/>
+    <br/>
+    <button ng-click="plus()">求和</button>
+    <span>{{result}}</span>
+</div>
+
+
+<script>
+    //创建模块
+    var app = angular.module('myApp', ['ng']);
+
+    app.factory('$Plus',function(){
+        return {
+            plus:function(num1,num2){
+                return parseFloat(num1)+parseFloat(num2);
+            }
+        }
+    });
+
+    //创建一个控制器
+    app.controller('myCtrl', ['$scope','$Plus',function ($scope,$Plus) {
+        $scope.plus = function(){
+            $scope.result = $Plus.plus($scope.num1,$scope.num2);
+        }
+    }]);
+
+
+</script>
+
+</body>
+</html>

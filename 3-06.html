@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--调用模块-->
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="js/angular.js"></script>
+    <title></title>
+</head>
+<body>
+<h1>ng的依赖注入</h1>
+
+<div ng-controller="myCtrl">
+    <button ng-click="clickFunc()">点击</button>
+    <h2>1.推断式（猜测式）</h2>
+    <h2>2.标记式</h2>
+    <h2>3.行内式</h2>
+    <p>{{num}}</p>
+</div>
+
+<!--推断式依赖注入-->
+<script src="js/3-06.min.js"></script>
+<!--标记式-->
+<script src="js/3-06-01.min.js"></script>
+<!--行内式-->
+<script src="js/3-06-02.min.js"></script>
+
+</body>
+</html>

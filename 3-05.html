@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--调用模块-->
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="js/angular.js"></script>
+    <title>ng中依赖注入</title>
+</head>
+<body>
+
+
+<div ng-controller="myCtrl">
+
+</div>
+
+
+<script>
+    //创建模块
+    var app = angular.module('myApp', ['ng']);
+
+    //创建一个控制器
+    app.controller('myCtrl', function () {
+
+    });
+
+
+</script>
+
+</body>
+</html>
