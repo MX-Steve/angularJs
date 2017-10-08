@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>依赖注入：$injector</title>
+    <script src="js/angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+
+</div>
+
+
+<script>
+    var app = angular.module('myApp', ['ng']);
+
+    //创建服务
+    app.factory('$custom',function(){
+        return {
+            print:function(){
+                console.log('$custom中的print被调用了');
+            }
+        }
+    });
+
+    //判断has是否存在这个服务
+    var injector = angular.injector(['ng','myApp']);
+    var result = injector.has('$custom');
+    console.log(result);
+
+    app.controller('myCtrl', function ($scope) {
+
+    });
+
+</script>
+</body>
+</html>
