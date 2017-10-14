@@ -1,0 +1,36 @@
+body,h1,h2,h3,h4,h5,h6,p,dl,dd,ul,ol,pre,form,
+input,textarea,th,td,select,span{
+	margin:0;padding:0
+}
+em{
+	font-style:normal
+}
+li{
+	list-style:none
+}
+a{
+	text-decoration:none
+}
+img{
+	border:none;
+	vertical-align:top
+}
+table{
+	border-collapse:collapse
+}
+textarea{
+	resize:none;overflow:auto
+}
+.clear{
+	zoom:1
+}
+.clear:after{
+	display:block;
+	content:"";
+	clear:both
+}
+.wrap{
+	width:1330px;
+	margin:0 auto;
+}
+

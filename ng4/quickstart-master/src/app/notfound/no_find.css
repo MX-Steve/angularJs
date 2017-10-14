@@ -1,0 +1,52 @@
+.container{
+	background:url("../img/no_find/timg.jpg") no-repeat;
+	background-size:cover;
+	position:fixed;
+	top:0;left:0;bottom:0;right:0;
+}
+#prompt{
+	width:800px;
+	height:300px;
+	background:#e5e5e5;
+	box-shadow:2px 2px 25px #000;
+	position:absolute;
+    left:50%;top:50%;
+    margin-left: -400px;
+    margin-top: -150px;
+}
+
+#prompt div.top{
+	height:60px;
+	width:800px;
+	background:url("../img/no_find/timg2.jpg") no-repeat;
+}
+
+#prompt div.top>h1{
+	line-height:60px;
+	color:#fff;
+	text-align:center;
+	font-family:"隶书";
+	letter-spacing:10px;
+}
+#prompt>div.left{
+	width:300px;
+	height:300px;
+	float:left;
+	text-align:center;
+}
+#prompt>div.left>img{
+    width: 196px;
+    height: 211px;
+    padding-top: 14px;
+}
+#prompt>div.right{
+	float:left;
+	width:500px;
+	height:300px;
+	padding-top:40px;
+}
+
+#prompt>div.right>p{
+	padding-top:10px;
+	font-size:18px;
+}

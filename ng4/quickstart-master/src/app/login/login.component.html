@@ -1,0 +1,25 @@
+ <div class="container">
+    <form>
+        <h3>欢迎登录</h3>
+		<p>
+			<label for="uname">登录名称：</label>
+            <input type="text" name="uname" 
+                 (blur)="checkUname('用户名',uname)"
+                placeholder="请输入用户名" id="uname" [(ngModel)]="uname">
+			<span id="uname-show">{{unameShow}}</span>
+		</p>
+		<p>
+            <label for="upwd">登录密码：</label>
+			<input type="password" 
+                (blur)="checkUpwd('密码',upwd)"
+                placeholder="请输入密码" name="upwd" id="upwd" [(ngModel)]="upwd">
+            <span>{{upwdShow}}</span>
+		</p>
+		<p>
+			<input type="button" id="submit"
+                [disabled]="!(num == 2)"
+                (click)="submit()" value="登录">
+		</p>
+	</form>
+
+ </div>

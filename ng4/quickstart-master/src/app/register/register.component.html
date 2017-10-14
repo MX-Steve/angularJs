@@ -1,0 +1,48 @@
+ <div class="container">
+    <form>
+        <h3>欢迎注册</h3>
+		<p>
+			<label for="uname">登录名称：</label>
+            <input type="text" name="uname" 
+                 (blur)="checkUname('用户名',uname)"
+                placeholder="请输入用户名" id="uname" [(ngModel)]="uname">
+			<span id="uname-show">{{unameShow}}</span>
+		</p>
+		<p>
+            <label for="upwd">登录密码：</label>
+			<input type="password" 
+                (blur)="checkUpwd('密码',upwd)"
+                placeholder="请输入密码" name="upwd" id="upwd" [(ngModel)]="upwd">
+            <span>{{upwdShow}}</span>
+		</p>
+		<p>
+            <label for="cpwd">重复密码：</label>
+			<input placeholder="请输入重复密码" 
+                type="password" 
+                (blur)="checkCpwd('密码',cpwd)"
+                id="cpwd" name="cpwd" [(ngModel)]="cpwd">
+			<span>{{cpwdShow}}</span>
+		</p>
+		<p>
+            <label for="phone">移动电话：</label>
+			<input placeholder="请输入电话号码" type="text" id="phone" name="phone" [(ngModel)]="phone">
+		</p>
+        <p>
+            <label for="addr">现今住址：</label>
+			<input type="text" id="addr" placeholder="请输入地址" name="addr" [(ngModel)]="addr">
+		</p>
+		<p>
+            <label for="gender">用户性别：</label>
+			<select id="gender" name="gender" [(ngModel)]="gender">
+				<option value="0">男</option>
+				<option value="1">女</option>
+			</select>
+		</p>
+		<p>
+			<input type="button" id="submit"
+                [disabled]="num > 0"
+                (click)="submit()" value="注册">
+		</p>
+	</form>
+
+ </div>

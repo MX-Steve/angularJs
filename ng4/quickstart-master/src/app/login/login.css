@@ -1,0 +1,39 @@
+.container{
+    position:fixed;
+    top:0;left:0;right:0;bottom:0;
+    background:url("../img/no_find/timg2.jpg") no-repeat;
+    background-size:cover;
+}
+.container form{
+    width:500px;
+    height:340px;
+    position:fixed;
+    top:50%;left:50%;
+    margin-top:-170px;
+    margin-left:-250px;
+    background:rgba(0,0,0,0.4);
+    color:#fff;
+}
+.container form h3{
+    text-align:center;
+    padding:20px 0;
+}
+.container form p{
+    padding:15px;
+}
+.container form p input {
+    height:24px;
+    outline: 0;
+    box-shadow: 2px 2px #ddd;
+    padding:3px 10px;
+    font-size: 16px;
+}
+.container form p span{
+    color:red;
+}
+#submit{
+    height:30px;width:80px;
+    display:block;
+    margin:0 auto;
+    background:#ff0;
+}
