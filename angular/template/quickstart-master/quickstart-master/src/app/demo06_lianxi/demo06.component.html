@@ -1,0 +1,21 @@
+<table border="1" width="80%">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>成绩</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor =" let tmp of stus "  >
+                <tr *ngIf="tmp.score >= 80">
+                    <td>{{tmp.uname}}</td>
+                    <td>{{tmp.age}}</td>
+                    <td>{{tmp.sex}}</td>
+                    <td>{{tmp.score}}</td>
+                </tr>
+            </ng-container>
+            
+        </tbody>
+    </table>

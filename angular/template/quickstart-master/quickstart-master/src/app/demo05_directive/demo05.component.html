@@ -1,0 +1,12 @@
+<h1>demo05页面</h1>
+
+<!--多重分支判断-->
+<div [ngSwitch]="answer">
+    <p *ngSwitchCase="'a'">A</p>
+    <p *ngSwitchCase="'b'">B</p>
+    <p *ngSwitchCase="'c'">c</p>
+    <p *ngSwitchCase="'d'">D</p>
+    <p *ngSwitchDefault>请输入正确答案</p>
+</div>
+<a href="http://www.tedu.cn">test</a>
+<a [href]="serverUrl">test02</a>

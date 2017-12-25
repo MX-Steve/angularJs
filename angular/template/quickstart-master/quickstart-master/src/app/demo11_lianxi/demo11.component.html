@@ -1,0 +1,15 @@
+<h1>lianxi</h1>
+<!--复选框和按钮-->
+
+<input type="checkbox" [(ngModel)]="isAgree">是否同意 <br>
+<button type="button" [disabled]="!isAgree">注册</button>
+
+<!--
+    有一个输入框，输入后存在ul中
+-->
+<input type="text" [(ngModel)]="userInput" (ngModelChange)="saveToHistory()">
+<ul>
+    <li *ngFor="let tmp of inputHistoryList">
+        {{tmp}}
+    </li>
+</ul>

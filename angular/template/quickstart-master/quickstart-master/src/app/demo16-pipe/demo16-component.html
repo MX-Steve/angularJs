@@ -1,0 +1,30 @@
+<h1>管道</h1>
+<!--自定义管道-->
+<p>{{price | myCurrency:"$"}}</p>
+<!--slice-->
+<p>{{tips}}</p>
+<p>{{tips|slice:0:7}}</p>
+<!--percent-->
+<p>{{scale|percent}}</p>
+<p>{{scale|percent:"3.2-2"}}</p>
+<!--currency-->
+<p>{{price | currency}}</p>
+<p>{{price | currency:"EUR":true}}</p>
+<p>{{price | currency:"CNY"}}</p>
+<p>{{price | currency:"USD":true}}</p>
+<p>{{price | currency:"USD":true:'4.1'}}</p>
+<!--uppercase/lowercase-->
+<p>{{actorName}}</p>
+<p>{{actorName | uppercase}}</p>
+<p>{{actorName | lowercase}}</p>
+
+<p>{{nowDate}}</p>
+<!--
+    date
+    yMd hms
+-->
+<p>{{nowDate | date:'hh:mm'}}</p>
+<!--number-->
+<p>{{price}}</p>
+<p>{{price|number:'4.1-1'}}</p>
+
