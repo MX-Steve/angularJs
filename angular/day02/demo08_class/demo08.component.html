@@ -1,0 +1,16 @@
+<h1 class="myRed">这是Demo08</h1>
+
+<!-- :class -->
+<p [ngClass]="{myRed:isUserLogin}">
+    it is a paragraph
+</p>
+
+<!--:style-->
+<p [ngStyle]="{backgroundColor:myBgColor}">test</p>
+
+
+
+<input type="text" 
+  [(ngModel)]="myBgColor" 
+  (ngModelChange)="handleChangBg($event)"
+/>

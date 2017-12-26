@@ -1,0 +1,12 @@
+<h1>这是和绑定的相关的demo</h1>
+
+<!--属性绑定 [] -->
+
+<!--事件绑定-->
+<button (click)="handleClick()" >
+  clickMe
+</button>
+
+<!--双向数据绑定 v-model ngModel -->
+<input type="text" [(ngModel)]="myInput" />
+<h2>{{myInput}}</h2>

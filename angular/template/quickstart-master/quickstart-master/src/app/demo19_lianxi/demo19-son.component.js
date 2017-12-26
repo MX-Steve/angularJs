@@ -11,8 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var Demo19SonComponent = (function () {
     function Demo19SonComponent() {
+        //定义一个myList数组
+        this.myList = [];
     }
-    Demo19SonComponent.prototype.ngOnInit = function () { };
+    Demo19SonComponent.prototype.ngOnInit = function () {
+        console.log("子组件接收到的数据为：" + this.myCount);
+        // setTimeout(()=>{},3000);
+        for (var i = 0; i < this.myCount; i++) {
+            this.myList.push(Math.floor(Math.random() * 100 + 1));
+        }
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], Demo19SonComponent.prototype, "myCount", void 0);
     Demo19SonComponent = __decorate([
         core_1.Component({
             selector: 'demo19-son',

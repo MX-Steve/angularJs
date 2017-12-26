@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'my-app',
-  template:"<demo19-parent></demo19-parent>"
+  template:"<router-outlet></router-outlet>"
 })
 export class AppComponent  { name = 'google angular'; }

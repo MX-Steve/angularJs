@@ -1,0 +1,24 @@
+RouterModule
+	基本步骤
+	导航
+	传参
+	嵌套
+	路由守卫
+
+一、导航（跳转 navigation）
+	1.js跳转
+		import {Router} from "@angular/router"
+		constructor(private router:Router){}
+		this.router.navigateByUrl(path);
+	2.a标签跳转
+		<a routerLink="/orderconfirm">去结算吧</a>
+	3.返回上一页
+		import { Location } from "@angular/common"
+		constructor(private myLoc:Location) { }
+		this.myLoc.back();
+二、跳转传参
+	基本步骤：
+		1.明确发送、接收
+		2.配置接收方的路由地址
+		3.接收参数
+		4.发送

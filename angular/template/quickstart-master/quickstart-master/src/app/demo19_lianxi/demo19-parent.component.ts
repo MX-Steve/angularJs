@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class Demo19ParentComponent implements OnInit {
-    count:number = 0;
+    count:number = 3;//初始化一个整数为0
     constructor() { }
 
     ngOnInit() { }

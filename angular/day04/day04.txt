@@ -1,0 +1,183 @@
+一、组件的生命周期
+	1.vue中组件的生命周期
+		create/mount/update/destroy
+		beforeCreate/created
+	2.angular中组件的生命周期
+		1.ngOnInit
+		2.ngOnChanges
+			ngDocheck当输入属性对应的值是一个集合，集合中的数据发生变化时，会调用的一个方法
+		3.ogOnDestroy
+			组件销毁
+		4.和视图相关的处理函数
+			1.ngAfterContentInit
+			2.ngAfterContentchecked
+			3.ngAfterViewInit
+			4.ngAfterViewChecked
+
+	组件或者指令中生命周期处理函数使用方式
+		1.import {OnDestroy} from "@angular/core"
+		export class TestComponent implements OnDestroy{
+			ngOnDestroy(){
+				//组件在销毁的时候会去执行的处理函数
+			}
+		}
+
+二、服务
+	服务：是一个类，将需要反复使用的数据或者方法封装在方法中，方便复用。
+			用来封装一些可重用的数据和方法
+
+	常用的服务：
+		网络请求服务
+		日志类服务
+		心跳服务
+	1.创建
+		import {Injectable} from "@angular/core"
+		@Injectable()
+		export class TestService{
+			//数据
+			//方法
+		}
+	2.使用
+		1.到模块或者组件中指定providers
+			//所有模块无需再指定提供商
+			import {TestService} from "";
+			@ngModule({
+				providers:[TestService]
+			});
+
+			//该组件和子组件无需指定提供商
+			import {TestService} from "";
+			@Component({
+				providers:[TestService]
+			});
+
+		2.在组件中调用
+			import {TestService} from"";
+			constructor (private ts:TestService){
+				this.ts.方法/服务
+			}
+	3.封装网络请求
+		1.rxjs
+			Rx reactive extensions 响应式编程，是异步通信的新的方式
+
+			异步请求的处理
+				1.回调函数
+					button onClick = handleClick()
+				2.promise
+					then
+				3.ajax
+					new open send
+				4.RXJS
+		
+			observe观察
+
+			subscribe订阅
+		
+		2.具体实现方式
+			① 指定当前模块依赖于网络请求模块
+				import {HttpModule} from "@angular/http"
+				@NgModule({
+					imports:[HttpModule]
+				});
+			② 会将网络请求封装成一个服务
+				import {Injectable} from '@angular/core'
+				import {Http,Response} from '@angular/http'
+				import { Observable } from 'rxjs/Observable';
+				import 'rxjs/add/operator/map';
+				import 'rxjs/add/operator/catch';
+				@Injectable()
+				export class MyHttpService {
+						constructor(private http: Http) { }
+						sendRequest(url:string){
+								// a-http-get
+								return this.http.get(url)
+										.map((response: Response) => response.json());
+						}
+				}
+				response.json()反序列化
+				序列化
+			③ 将网络请求服务在模块中指定一个提供商
+				import { MyHttpService } from "./demo23_http/http.service"
+				@NgModule({
+					imports:[ BrowserModule ,FormsModule , HttpModule ],
+				 
+					providers:[TestService,MyLogService,HeartBeatingService,MyHttpService]
+				})
+			④	调用服务
+				import { MyHttpService } from "./http.service"
+				constructor(private myHttp:MyHttpService) { }
+				this.myHttp
+            .sendRequest("http://127.0.0.1:8080/step04/admin/data/product/index.php")
+            .subscribe(result=>{
+                console.log(result);
+            });
+						//subscribe:订阅
+		3.允许通信数据中携带和session相关的凭证信息
+			1.客户端
+				在服务中的get
+					this.http.get(url,{widthCredentials:true});
+			2.服务器端
+				header("Access-Control-Allow-Origin:http://localhost:3000");
+				header("Access-Control-Allow-Credentials:true");
+		
+三、路由模块
+	vueJs的路由模块
+		建立url和组件映射关系
+			1.基本步骤
+				vue-router.js
+				<router-view></router-view>
+				创建需要用到的各个组件
+					vue.component();
+				建立映射关系
+				new Vue({
+					router:new VueRouter({
+						routes:[
+							{path:"/",component:LoginComponent},
+							{path:"/login",component:LoginComponent}
+							{path:"*",component:NotFoundComponent}
+						]
+					})
+				});
+			2.跳转方式
+				标签：router-link to="/login"
+				js：this.$router.push("/login");
+
+			3.传参的基本步骤
+				明确发送和接收
+				配置接收方的路由地址
+					path:"/login/:id"
+				接收参数
+					this.$route.params.id
+				发送
+					router-link :to="'/login/'+id"
+					this.$router.push("/login/"+this.id);
+			4.路由嵌套
+				准备嵌套其他组件的地方指定容器
+					router-view
+				给其他要嵌套进去的组件配置路由词典
+					{path:"/",component:LoginComponent
+						children:[
+							{.}
+						]
+					}
+	
+	angular的路由模块
+		1.基本步骤
+			1.使用路由模块创建SPA的基本步骤
+				1.指定依赖于RouterModule
+				2.指定容器
+					<router-outlet></router-outlet>
+				3.创建需要用到的组件
+				4.配置路由词典
+					1.创建一个app.router.ts,本质是一个模块
+						a-module-routing
+						1.修改了要引入的文件
+						2.配置路由词典
+						3.将forChild改为forRoot @NgModule imports RouteModule.forRoot();
+						4.修改导出类的名称
+							apRoutingModule
+						5.最后一句话注释掉
+			2.基本使用
+				引入到app.module.ts
+				写入到imports:[AppRoutingModule]
+

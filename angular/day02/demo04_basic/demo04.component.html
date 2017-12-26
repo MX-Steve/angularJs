@@ -1,0 +1,11 @@
+<h1>Hello World</h1>
+
+<ul>
+  <li *ngFor="let tmp of list;let myIndex=index">
+  {{"index is "+myIndex+" value is "+tmp}}
+  </li>
+</ul>
+
+<button *ngIf="hasMore">加载更多</button>
+
+<p *ngIf="!hasMore">没有更多数据可以加载了</p>

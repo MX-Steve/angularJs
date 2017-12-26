@@ -1,0 +1,23 @@
+
+<h1>这是Demo06</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>年龄</th>
+      <th>性别</th>
+      <th>成绩</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <ng-container *ngFor="let stu of stuList" >
+      <tr *ngIf="stu.score>80">
+        <td>{{stu.age}}</td>
+        <td>{{stu.sex}}</td>
+        <td>{{stu.score}}</td>
+      </tr>
+    </ng-container>
+    
+  </tbody>
+</table>

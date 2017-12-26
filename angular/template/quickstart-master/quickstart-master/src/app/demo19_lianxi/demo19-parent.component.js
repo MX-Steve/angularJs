@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var Demo19ParentComponent = (function () {
     function Demo19ParentComponent() {
-        this.count = 0;
+        this.count = 3; //初始化一个整数为0
     }
     Demo19ParentComponent.prototype.ngOnInit = function () { };
     Demo19ParentComponent = __decorate([

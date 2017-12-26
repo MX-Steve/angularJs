@@ -1,0 +1,141 @@
+一、angular概述
+	官网：
+		angular.cn
+		angular.io
+	版本：angular4.0
+		在推出2.0之后，官方承诺2.0之后的所有版本， 都是基于同一版本，只会有新的特效
+		angularJS的学习建议：
+		www.runoob.com/angularjs
+		angular1.*和angular2.0之后的所有版本区别非常大
+		称呼：angular1.*-->angularJS
+					angular2.0之后-->angular
+		实现：angularJS的双向数据绑定是基于脏数据检查机制，在2.0之后采用了更高效的基于zone.js的方式
+		angularJS之前没有组件，是靠$scope,$rootscope来实现作用域的管理，现在就是靠组件和组件间通信
+
+	使用公司：
+		Google、锤子科技、微信网页版
+
+	what?
+		angular是一个js的开源的框架
+	where?
+		数据操作非常频繁的SPA
+	why?
+		1.支持一种typescript语言
+			javascript：js
+			typescript：ts==》微软提出的，是es6的超级，是一个真正的可以面向对象开发的语法
+			强类型检查机制的语言
+			如：var a = 3;
+					a = "张三"
+					会报错
+
+		2.组件component(webcomponent标准)
+			组件是可以被反复使用的，带有特定功能的视图
+			组件化（模块化的好处）的好处？
+				1.提高了代码的复用率
+				2.提高了代码的可读性
+				3.降低了测试和维护的难度
+
+		3.angular引入了更多的提高性能的工具，比如rxjs/zone.js让开发和部署变的更简单
+	how?
+		1.搭建开发环境
+			方法1：
+				//全局安装ng的命令行工具
+				1.npm install -g @angular/cli
+				//创建基于ng模板的项目
+				2.ng new my-app
+				//进入到对应的工程中
+				3.cd my-app
+				//启动开发服务器
+				4.ng server 
+			方法2：
+				1.下载对应的包
+					https://github.com/angular/quickstart
+				2.安装依赖
+					npm install
+				3.进入项目
+					cd my-app
+				4.启动项目
+					ng server
+		
+			具体实现方式
+				1.将压缩包放到指定文件夹
+				2.将压缩包解压缩到当前文件夹
+				3.将quickstartmaster解压缩到quickstartmaster
+				4.将nodemodles.zip压缩包拷贝到quickstartmaster中
+				5.将nodemodles.zip解压缩到当前文件夹
+				6.vsc打开工程，在终端中npm start
+		
+		2.启动流程
+			angular以模块为基本单位，模块可以包含各种各样的组件、指令、服务...
+			VueJS是一组件为基本单位
+
+			main.ts --> 
+
+三、组件的创建和使用
+	1.Vue中创建组件的方式：
+		var Mycomponent = Vue.component('my-son',{
+			tmplate:""
+		});
+		{path:"",component:Mycomponent}
+	2.Angular中创建组件的方式
+		创建：
+			import { Component } from "@angular/core"
+
+			@Component({
+				selector:"demo01",
+				template:`<h1>{{title}}</h1>`
+			})
+
+			export class Demo01Component{
+				title:"今天天气不错"
+			}
+		
+		使用：
+			1.声明：
+				到app.module.ts中引入自己写的组件
+					import { Demo01Component } from "./demo01/Demo01Component"
+				
+					@NgModule({//装饰器@
+						declarations: [ AppComponent , Demo01Component],
+					})
+			2.调用：
+				<demo01></demo01>
+			
+				注意事项：
+					1.组件调用之前必须声明
+					2.组件在使用时，必须写成<Demo></Demo>
+
+	3.项目目录结构：
+				扩展：tsc：typescript compiler:将ts转换为多数浏览器都支持的js
+				src 
+					--app
+						--demo01
+							demo01.component.ts
+						--app.component.ts//根组件
+						--app.module.ts//根模块
+					--main.ts//启动时要执行的文件
+				package.json 不需要修改，
+	
+	4.复合组件
+		复合：就是一个组件嵌套其他组件
+
+
+常见错误
+1.未声明
+2.SPAWN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

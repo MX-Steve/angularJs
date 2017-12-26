@@ -1,0 +1,18 @@
+1、未知元素
+Unhandled Promise rejection: Template parse errors:
+'demo01' is not a known element:
+
+未在模块中声明 或者 组件名写错了
+
+2、SPAWN ENOENT
+npm start
+-->
+npm run serve
+
+3、开发服务器无法启动
+当执行npm start，发现在控制台报了一堆的error，到第一个error前边的那几句话，分析错误出在哪个文件 哪一行
+
+4、ngModel使用时报错
+Can't bind to 'ngModel' since it isn't a known property of 'input'. 
+
+解决方案是借助于：让当前模块依赖于FormsModule

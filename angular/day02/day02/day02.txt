@@ -1,0 +1,217 @@
+
+VisualStudioCode是支持插件的，可以在左侧的最后一个按钮，点击弹出的一个插件的列表，
+如果需要安装某个插件，在搜索框中搜索，直接点击安装，可以重新加载或者关掉vscode再打开。
+
+如果vsCode没有安装angular插件：
+①找到johnpapa.angular2-2.3.3文件夹，拷贝文件夹
+②找到C:\Users\web-01\.vscode\extensions
+③粘贴到当前目录
+④到vscode中重新加载
+
+Angular整体开发的思路：
+用 Angular 扩展语法编写 HTML 模板， 用组件类管理这些模板，用服务添加应用逻辑， 用模块打包发布组件与服务
+
+
+Angular基本语法
+
+一、指令
+
+Angular中指定组件类的元数据时：
+selector/template/templateUrl
+
+Vue中的指令：
+	循环 v-for="(tmp,index) in 集合"
+	选择 v-if="expression" v-else-if v-else
+	绑定 v-bind:src :src/ v-on:click @click / v-model
+	v-show v-html...
+
+1、Angular基本语法：
+	双花括号
+	<any>{{expression}}</any>
+
+一、Angular中的内置指令	
+	
+	指令一般分为两种：
+		结构型指令 ：修改DOM结构
+		属性（行为）型指令： 修改元素的外观和行为
+
+	1、循环指令
+		<any *ngFor="let tmp of list;let myIndex=index">
+		</any>
+		在遍历集合的同时，创建多个调用该指令的标签
+  2、选择指令
+		<any *ngIf="expression"></any>
+		将根据表达式执行结果的真假 来决定当前元素是否要挂载到DOM
+	3、多重分支判断
+		<div [ngSwitch]="answer">
+			<p *ngSwitchCase="'a'">A</p>
+			<p *ngSwitchCase="'b'">B</p>
+			<p *ngSwitchCase="'c'">C</p>
+			<p *ngSwitchCase="'d'">D</p>
+			<p *ngSwitchDefault>请输入正确的答案</p>
+		</div>
+	4、属性绑定
+		将一个表达式执行的结果或者变量中的值 绑定到 某个属性
+		语法：
+		<any [attr]="expression/value"></any>
+
+
+练习：（2:07 - 2:17）
+	新建demo06_lianxi的文件夹，demo06.component.ts
+
+	有一个对象数组（5个），每个对象都包含：age sex score，要求将对象数组中的内容显示在table中，只显示成绩在80分以上的行
+	
+	注意事项：
+		多个结构型指令不能同时用在同一个标签上边，是会报错。
+		解决方案：借助于ngContainer，不会影响DOM树的结构
+
+	5、事件绑定
+		<any (eventName)="handleEvent()"></any>
+
+		<button (click)="handleClick()"></button>
+
+	6、双向数据绑定
+		前提：
+			必须声明当前的模块 依赖于 表单模块
+				①找到app.module.ts
+				②import {FormsModule} from '@angular/forms'
+				③@NgModule({
+					imports:[FormsModule]
+				})
+
+		<input [(ngModel)]="myName"/>
+		方向1：将变量中的值 绑定到 视图
+		方向2：将视图中用户操作的结果 绑定到 数据
+
+		扩充：
+			复习Vue：
+				v-bind:class="{myRed:true}"
+				v-bind:style="{color:myColor}"
+			1、ng动态样式
+			<any [ngClass]="{myRed:expression}"></any>
+			<any [ngStyle]="{backgroundColor:myColor}"></any>
+
+			2、如何在双向数据绑定的变量发生变化时去执行指定的操作呢？（监听）
+			<input [(ngModel)]="myName" (ngModelChange)="handleChange($event)"/>
+
+
+练习：（16:10 - 16:25）
+	demo09_lianxi  demo09.component.ts demo09.component.html
+
+	视图中有一个按钮 有一个p
+	功能：点击按钮时，启动定时器，
+	修改p的透明度（0~1 0~1）
+
+
+二、自定义指令类
+
+复习Vue：
+	
+	<any v-my-dir="123"></any>
+
+	new Vue({
+		directives:{
+			my-dir:{
+				bind:function(el,bindings){
+					//bindings.value
+				},
+				update:function(){},
+				unbind:function(){}
+			}
+		}
+	})
+
+
+	Vue.directive('my-dir',{
+				bind:function(){},
+				update:function(){},
+				unbind:function(){}
+			})
+	
+ng:
+
+	创建自定义指令类：
+		import {Directive,ElementRef} from '@angular/core'
+
+		@Directive({
+			selector:'[test]'
+		})
+
+		export class TestDirective{
+			constructor(private myER:ElementRef){
+				//构造函数
+				//得到调用指令的标签
+				this.myER.nativeElement
+			}
+		}
+
+
+	使用：
+	<any test></any>
+
+	自定义指令参数的传递和接收???
+
+
+
+	Angular的八大组成部分：
+	①Module
+		是Angular开发的基本单位，程序在启动时 首先先去启动根模块(AppModule),模块又会指定启动哪个组件(AppComponent)
+		模块可以包含组件、指令、服务。。。
+	②Component
+		组件是一个可被反复使用的，带有特定功能的视图
+		（本质是一个带有模板内容的指令类）
+		帮助我们封装可重用的视图
+	③Directive
+		指令是一个类(test.directive.ts),得到当前调用指令的元素，根据业务需求，在类中去完成功能，比如修改元素的内容，元素的透明度...
+
+		结构型 *ngFor *ngIf *ngSwitchCase
+		属性型 [ngClass] ngStyle () [(ngModel)]
+		自定义 
+	④metaData
+		元数据：元数据告诉 Angular 如何处理一个类。
+		要配合这装饰器(decorator)来使用
+		@NgModule({
+			imports:[BrowserModule,FormsModule,RouterModule],
+			declarations:[Demo01Component, AppComponent,HelloComponent],
+			bootStrap:[AppComponent]
+		})
+	⑤模板 template
+	我们通过组件的自带的模板来定义组件视图。模板以 HTML 形式存在，告诉 Angular 如何渲染组件。
+		有了自定义的标签
+		扩展了html（循环、选择、绑定。。。）
+
+	⑥数据绑定
+		插值表达式 {{}}
+		事件绑定 ()
+		属性绑定 []
+		双向数据绑定 [(ngModel)]
+
+
+总结：
+	1、内置指令的使用
+		*ngFor *ngIf [ngSwitch] *ngSwitchCase *ngSwitchDefault 
+		[src]="imgUlr"
+		(click)="handleClick()"
+		[(ngModel)]="userName" --> 指定当前模块依赖于表单模块
+		(ngModelChange)="handleChange($event)"
+		[ngClass]="{className:expression}"
+		[ngStyle]="{opacity:myColor}"
+
+	2、自定义指令
+		ElementRef
+
+		自定义指令在创建完之后，要到模块中声明！
+
+
+每日一练：
+	
+	demo11_lianxi
+	demo11.component.ts
+
+	功能1：
+	一个复选框一个按钮，
+	复选框选中的结果要影响按钮是否禁用
+
+	功能2：
+		有一个输入框，一个无序列表
+		在无序列表中 显示用户输入过的所有的数据

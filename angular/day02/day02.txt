@@ -1,0 +1,70 @@
+1.angular基本语法
+
+
+
+
+一、指令
+	1.vue中的指令
+		v-for="(tmp,index) in 集合"
+		v-if="expression" v-else-if v-else
+		v-bind:src :src 
+		v-on:click @click
+		v-model
+		v-show/v-html...
+
+	Angular 基本语法：
+		双花括号
+			<any>{{expression}}</any>
+
+	2.angular中的指令
+		指令一般分为两种：
+			一种结构型指令：修改DOM结构，
+			一种是属性(行为)型指令:修改元素的外观和属性
+
+		*结构型指令
+		1.循环指令 *ngFor
+			<any *ngFor="let tmp of list;let myIndex = index">
+				{{"tmp is "+tmp+"index is "+myIndex}}
+			</any>
+			作用：在遍历集合的同时创建多个调用该指令的标签
+		2.选择指令 *ngIf
+			<any *ngIf="expressiong">.....</any>
+			作用：根据表达式结果的真假，来判断是否挂载到dom树上
+		3.多重分支
+			<div [ngSwitch]="answer">
+					<p *ngSwitchCase="'a'">A</p>
+					<p *ngSwitchCase="'b'">B</p>
+					<p *ngSwitchCase="'c'">c</p>
+					<p *ngSwitchCase="'d'">D</p>
+					<p *ngSwitchDefault>请输入正确答案</p>
+			</div>
+		4.属性绑定:将一个变量中的值，绑定到 某个属性
+			语法： <any [attr]="expression/value"></any>
+			[属性]="变量"
+
+		注意事项：
+			多个结构型指令不能同时用在同一个标签上，是会报错
+			==》解决方案：借助于ngContainer，不会影响dom结构
+
+		5.事件绑定
+		<any (eventName)="handleClick()"></any>
+		<!--事件绑定-->
+		<button type="button" (click)="handleClick()">clickMe</button>
+
+		6.双向数据绑定
+			前提
+				app.module.ts
+					import { FormsModule } from "@angular/forms"
+					@NgModule({
+						imports:      [ BrowserModule ,FormsModule ],
+					}
+			使用
+				<input type="text" [(ngModel)]="kw"/>
+			作用：
+				方向1：将变量中的值绑定到视图上
+				方向2：将视图中的用户操作的结果  绑定到  数据
+			
+		
+		1.ng动态样式
+			any [ngClass]="{myRed:expression}"
+			any [ngStyle]="{backgroundColor:myColor}"

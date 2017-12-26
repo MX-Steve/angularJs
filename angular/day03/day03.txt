@@ -1,0 +1,139 @@
+一、组件间的通信
+	Vue组件间通信
+		1.props down 父=》子 
+			<son myName="zhangsan"/>
+			Vue.component("son",{
+				props:['myName'],
+				tempalte:'<h1>{{myName}}</h1>'
+			});
+		2.events up 子=》父
+			绑定事件处理函数（接收方）
+			触发事件（发送方）
+			步骤1：在父组件中定义一个带有参数的方法
+				rcvMsg:function(msg){}
+			步骤2：在调用子组件时 绑定
+				son @customEvent="rcvMsg"
+			步骤3：触发事件
+				this.$emit(customEvent,'123');
+		3.ref
+			<son ref = "mySon"></son>
+			this.refs.mySon拿到对象实例
+		4.$parent
+		5.bus
+
+	Angular组件通信：
+		1.props down
+			1.在调用子组件时通过属性传值
+				<son myAge="20" mySex="boy"></son>
+			2.在子组件中，指定可以有一个输入属性为myAge
+				import {Input} from "@angular/core"
+
+				export class SonComponent{
+					@Input() myAge="";
+					@Input("mySex") userSex=""
+				}
+			3.在子组件中，调用属性出来的值
+				this.myAge
+				this.userSex
+		
+		2.events up
+			绑定
+				(customEvent)=""
+			触发
+				Output , EventEmitter
+			步骤1：在父组件中定义一个带有参数的方法
+			步骤2：将方法绑定给子组件的自定义事件
+			步骤3：在子组件中触发指定的事件，并且捎带参数
+				import {Output,EventEmitter} from "@angular/core"
+				@Output() myEvent = new EventEmitter();
+				this.myEvent.emit('12345');
+
+		3.本地变量
+			本地变量 可以帮助我们在父组件的模板中得到子组件的实例，可以读取子组件中定义的方法，去调用
+			方式1：
+				步骤1:在父组件调用子组件时，指定本地变量
+					<son #sonName><son>
+				步骤2:在父组件的模板中，通过sonName这个对象去调用属性或者方法
+					<son #sonName><son>
+					<h1>{{sonName.age}}</h1>
+				注意事项：不允许在js中，得到本地变量所指定的子组件实例
+		4.ViewChild得到本地变量所指定的子组件实例
+			方式2：
+			步骤1：在调用子组件时，指定本地变量
+				<son #mySon></son>
+			步骤2：父组件引入ViewChild
+				import {  ViewChild } from '@angular/core';
+			步骤3：在父组件类中，通过装饰器，定义需要接收的子组件实例的变量
+				@ViewChild('mySon') mySon:any;
+			步骤4：
+				this.mySon调用数据和方法
+
+二、管道pipe（过滤器）
+
+	vue2.0没有内置过滤器，
+		Vue.component("my-component",{
+			filters:{
+				myCurrency:function(value,arg1,arg2){
+					//value:数据
+					arg1,arg2:参数
+				}
+			}
+		});
+		any {{expression | myCurrency(arg1,arg2)}}
+
+	angular支持内置的管道,也支持管道的自定义
+		基本用法:支持传参、支持多重过滤
+			<any>{{expression | myPipe:arg1:arg2 | myPipe2}}</any>
+		
+		1.内置的管道
+			uppercase/lowercase
+			date
+			number
+				<any>{{123.45|number:"4.1-2"}}</any>//1:最少1位小数;2:最多2位小数
+				小数点前边显示4位
+				小数点后边最少1位，最多2位
+				[整数位保留最少位数].[小数部分保留小数位数]-[小数部分保留最多位数]
+			
+			currency
+				<p>{{price | currency:"EUR":true:"2.1"}}</p>
+					参数1：目标货币格式
+					参数2：是否显示符号
+					参数3：小数点的格式化信息
+			
+			percent
+				<p>{{scale|percent}}</p>
+				<p>{{scale|percent:"3.2-2"}}</p>
+
+			slice
+				<p>{{tips|slice:0:7}}</p>
+		
+		2.自定义管道
+			管道类
+			步骤1：创建文件，指定管道名称、类名、在方法中如何处理数据，并返回处理后的结果
+				myCurrency.pipe.ts
+			步骤2：到模块中去声明	
+				import { MyCurrencyPipe } from "..."
+				@NgModule({
+					declarations:[
+						MyCurrencyPipe
+					]
+				})
+			步骤3：
+				<any>{{expression | myCurrency}}</any>
+
+三、自定义指令传参
+	
+	1.创建指令类 hello.directive.ts
+		selector:'[hello]'
+	2.声明
+		app.module.ts去引入指令类，并进行声明
+	3.调用
+		<any hello="myValue"></any>
+	4.接收调用指令时传来的参数
+		在指令类中，引入Input(输入属性)
+		@Input() hello:any / @Input('hello') myArgs:any
+		//解析调用指令时传来的参数
+		this.hello
+
+页面之间参数的传递
+与服务器端的通信

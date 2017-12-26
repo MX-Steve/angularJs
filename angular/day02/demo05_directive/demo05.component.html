@@ -1,0 +1,16 @@
+
+<h1>这是Demo05组件</h1>
+
+<!--多重分支判断-->
+<div [ngSwitch]="answer">
+  <p *ngSwitchCase="'a'">A</p>
+  <p *ngSwitchCase="'b'">B</p>
+  <p *ngSwitchCase="'c'">C</p>
+  <p *ngSwitchCase="'d'">D</p>
+  <p *ngSwitchDefault>请输入正确的答案</p>
+</div>
+
+<!--属性绑定-->
+<a href="http://www.baidu.cn">test</a>
+
+<a [href]="serverUrl">test02</a>
